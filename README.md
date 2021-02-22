@@ -1,11 +1,8 @@
-ethis::use_git()
-usethis::use_github()
-usethis::use_pkgdown()
-usethis::use_github_action("pkgdown")
-
 # movieaRt
 
 <!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![pkgdown](https://github.com/js2264/movieaRt/workflows/pkgdown/badge.svg)](https://github.com/js2264/movieaRt/actions)
 <!-- badges: end -->
 
 The goal of movieaRt is to ...
