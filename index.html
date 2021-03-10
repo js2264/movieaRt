@@ -86,11 +86,11 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span> <span class="co"># this set of colors was extracted from The Grand Budapest Hotel, directed by Wes Anderson.</span>
 <span class="va">main_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/filterColors.html">filterColors</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span>
 <span class="va">average_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/smoothColors.html">smoothColors</a></span><span class="op">(</span><span class="va">main_colors</span><span class="op">)</span>
-<span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="va">average_colors</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/movieStack.html">movieStack</a></span><span class="op">(</span><span class="va">average_colors</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/TGBH.png"></p>
 <p>Timeline can be added using the <code>nsec</code> argument:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="va">average_colors</span>, nsec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/movieStack.html">movieStack</a></span><span class="op">(</span><span class="va">average_colors</span>, nsec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Timepoints can be added using the <code>timepoints</code> argument:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
@@ -98,7 +98,7 @@
     <span class="st">'36'</span> <span class="op">=</span> <span class="st">'Part III: Criminal Internment Camp'</span>, 
     <span class="st">'77'</span> <span class="op">=</span> <span class="st">'Snow pursuit'</span>
 <span class="op">)</span>
-<span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="va">average_colors</span>, nsec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span>, tp <span class="op">=</span> <span class="va">tp</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/movieStack.html">movieStack</a></span><span class="op">(</span><span class="va">average_colors</span>, nsec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span>, tp <span class="op">=</span> <span class="va">tp</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/TGBH_with-timepoints.png"></p>
 </div>
 <div id="tidy-workflow" class="section level2">
@@ -109,11 +109,20 @@
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getColorList.html">getColorList</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="reference/filterColors.html">filterColors</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="reference/smoothColors.html">smoothColors</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <span class="fu"><a href="reference/movieStack.html">movieStack</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="plotting-movie-frame-with-color-story" class="section level2">
+<div id="movie-palette" class="section level2">
 <h2 class="hasAnchor">
-<a href="#plotting-movie-frame-with-color-story" class="anchor"></a>Plotting movie frame with color story</h2>
+<a href="#movie-palette" class="anchor"></a>Movie palette</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span>
+<span class="va">palette</span> <span class="op">&lt;-</span> <span class="va">colors</span> <span class="op">%&gt;%</span>
+    <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/flatten.html">flatten</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="reference/moviePalette.html">moviePalette</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="reference/checkPalette.html">checkPalette</a></span><span class="op">(</span><span class="va">palette</span>, unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/TGBH_palette.png"></p>
 </div>
 </div>
   </div>
