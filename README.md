@@ -13,7 +13,7 @@ makeFrames(video, outdir = 'frames/')
 list_colors <- getColorList(dir = 'frames/')
 ```
 
-## Processing the colors and plotting them
+## Processing the colors and plotting a color story
 
 ```r
 data(colors) # this set of colors was extracted from The Grand Budapest Hotel, directed by Wes Anderson.
@@ -24,6 +24,25 @@ colorStack(average_colors)
 
 ![](man/figures/TGBH.png)
 
+Timeline can be added using the `nsec` argument: 
+
+```r
+colorStack(average_colors, nsec = length(colors))
+```
+
+Timepoints can be added using the `timepoints` argument: 
+
+```r
+tp <- list(
+    '24' = 'Funerals', 
+    '36' = 'Part III: Criminal Internment Camp', 
+    '77' = 'Snow pursuit'
+)
+colorStack(average_colors, nsec = length(colors), tp = tp)
+```
+
+![](man/figures/TGBH_with-timepoints.png)
+
 ## Tidy workflow
 
 ```r
@@ -33,3 +52,7 @@ p <- getColorList() %>%
     smoothColors() %>% 
     colorStack()
 ```
+
+## Plotting movie frame with color story
+
+
