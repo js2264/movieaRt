@@ -4,7 +4,7 @@
 \alias{getColorList}
 \title{getColorList}
 \usage{
-getColorList(dir = "frames/")
+getColorList(dir = "frames/", cores = 3)
 }
 \description{
 getColorList

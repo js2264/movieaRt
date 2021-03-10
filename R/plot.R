@@ -1,8 +1,8 @@
-#' colorStack
+#' movieStack
 #'
 #' @export
 
-colorStack <- function(
+movieStack <- function(
     cols, 
     orientation = 'landscape', 
     ratio = 10,

@@ -23,23 +23,6 @@ filterColors <- function(list_colors, threshold_sat = 0.2, threshold_lum = 0.05,
         else {
             if (length(cols) > 1) cols <- reduceColors(cols)
             if (length(cols) > 1) cols <- cols[1]
-            # if (length(cols) > 0) {
-            #     Lstars <- sapply(cols, getLuminance)
-            #     Sats <- sapply(cols, getSaturation)
-            #     if (any(Lstars > threshold_lum & Sats > threshold_sat)) {
-            #         col <- cols[which(Lstars > threshold_lum & Sats > threshold_sat)[1]]
-            #     }
-            #     else if (any(Sats > threshold_sat)) {
-            #         col <- cols[which(Sats > threshold_sat)[1]]
-            #     }
-            #     else {
-            #         col <- adjustLuminance(cols[which.max(Sats)], min, max)
-            #     }
-            #     return(col)
-            # }
-            # else {
-            #     return(NA)
-            # }
             return(cols)
         }
     })

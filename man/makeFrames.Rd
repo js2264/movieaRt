@@ -4,7 +4,7 @@
 \alias{makeFrames}
 \title{makeFrames}
 \usage{
-makeFrames(path = NULL, fps = "1/60", outdir = "frames/")
+makeFrames(path = NULL, fps = "1", outdir = "frames/")
 }
 \description{
 makeFrames
