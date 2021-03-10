@@ -5,22 +5,31 @@
 [![pkgdown](https://github.com/js2264/movieaRt/workflows/pkgdown/badge.svg)](https://github.com/js2264/movieaRt/actions)
 <!-- badges: end -->
 
-The goal of movieaRt is to ...
+## Getting main colors per frame
 
-## Installation
-
-You can install the released version of movieaRt from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("movieaRt")
+```r
+video <- "path/to/video.mp4"
+makeFrames(video, outdir = 'frames/')
+list_colors <- getColorList(dir = 'frames/')
 ```
 
-## Example
+## Processing the colors and plotting them
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(movieaRt)
-## basic example code
+```r
+data(colors) # this set of colors was extracted from The Grand Budapest Hotel, directed by Wes Anderson.
+main_colors <- filterColors(colors)
+average_colors <- smoothColors(main_colors)
+colorStack(average_colors)
 ```
 
+![](man/figures/TGBH.png)
+
+## Tidy workflow
+
+```r
+makeFrames("path/to/video.mp4")
+p <- getColorList() %>% 
+    filterColors() %>% 
+    smoothColors() %>% 
+    colorStack()
+```
