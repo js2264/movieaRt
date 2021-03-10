@@ -71,21 +71,33 @@
 <a href="#movieart" class="anchor"></a>movieaRt</h1></div>
 <!-- badges: start -->
 
-<p>The goal of movieaRt is to …</p>
-<div id="installation" class="section level2">
+<div id="getting-main-colors-per-frame" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of movieaRt from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<a href="#getting-main-colors-per-frame" class="anchor"></a>Getting main colors per frame</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"movieaRt"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">video</span> <span class="op">&lt;-</span> <span class="st">"path/to/video.mp4"</span>
+<span class="fu"><a href="reference/makeFrames.html">makeFrames</a></span><span class="op">(</span><span class="va">video</span>, outdir <span class="op">=</span> <span class="st">'frames/'</span><span class="op">)</span>
+<span class="va">list_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getColorList.html">getColorList</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="st">'frames/'</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
+<div id="processing-the-colors-and-plotting-them" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<a href="#processing-the-colors-and-plotting-them" class="anchor"></a>Processing the colors and plotting them</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/js2264/movieaRt">movieaRt</a></span><span class="op">)</span>
-<span class="co">## basic example code</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span> <span class="co"># this set of colors was extracted from The Grand Budapest Hotel, directed by Wes Anderson.</span>
+<span class="va">main_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/filterColors.html">filterColors</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span>
+<span class="va">average_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/smoothColors.html">smoothColors</a></span><span class="op">(</span><span class="va">main_colors</span><span class="op">)</span>
+<span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="va">average_colors</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/TGBH.png"></p>
+</div>
+<div id="tidy-workflow" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tidy-workflow" class="anchor"></a>Tidy workflow</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/makeFrames.html">makeFrames</a></span><span class="op">(</span><span class="st">"path/to/video.mp4"</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getColorList.html">getColorList</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="reference/filterColors.html">filterColors</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="reference/smoothColors.html">smoothColors</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
