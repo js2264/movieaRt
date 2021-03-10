@@ -79,25 +79,41 @@
 <span class="fu"><a href="reference/makeFrames.html">makeFrames</a></span><span class="op">(</span><span class="va">video</span>, outdir <span class="op">=</span> <span class="st">'frames/'</span><span class="op">)</span>
 <span class="va">list_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getColorList.html">getColorList</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="st">'frames/'</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="processing-the-colors-and-plotting-them" class="section level2">
+<div id="processing-the-colors-and-plotting-a-color-story" class="section level2">
 <h2 class="hasAnchor">
-<a href="#processing-the-colors-and-plotting-them" class="anchor"></a>Processing the colors and plotting them</h2>
+<a href="#processing-the-colors-and-plotting-a-color-story" class="anchor"></a>Processing the colors and plotting a color story</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span> <span class="co"># this set of colors was extracted from The Grand Budapest Hotel, directed by Wes Anderson.</span>
 <span class="va">main_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/filterColors.html">filterColors</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span>
 <span class="va">average_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/smoothColors.html">smoothColors</a></span><span class="op">(</span><span class="va">main_colors</span><span class="op">)</span>
 <span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="va">average_colors</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/TGBH.png"></p>
+<p>Timeline can be added using the <code>nsec</code> argument:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="va">average_colors</span>, nsec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Timepoints can be added using the <code>timepoints</code> argument:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    <span class="st">'24'</span> <span class="op">=</span> <span class="st">'Funerals'</span>, 
+    <span class="st">'36'</span> <span class="op">=</span> <span class="st">'Part III: Criminal Internment Camp'</span>, 
+    <span class="st">'77'</span> <span class="op">=</span> <span class="st">'Snow pursuit'</span>
+<span class="op">)</span>
+<span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="va">average_colors</span>, nsec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span>, tp <span class="op">=</span> <span class="va">tp</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/TGBH_with-timepoints.png"></p>
 </div>
 <div id="tidy-workflow" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidy-workflow" class="anchor"></a>Tidy workflow</h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/makeFrames.html">makeFrames</a></span><span class="op">(</span><span class="st">"path/to/video.mp4"</span><span class="op">)</span>
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getColorList.html">getColorList</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="reference/filterColors.html">filterColors</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="reference/smoothColors.html">smoothColors</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="reference/colorStack.html">colorStack</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="plotting-movie-frame-with-color-story" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plotting-movie-frame-with-color-story" class="anchor"></a>Plotting movie frame with color story</h2>
 </div>
 </div>
   </div>
