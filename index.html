@@ -123,15 +123,24 @@
     <span class="fu"><a href="reference/moviePalette.html">moviePalette</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="reference/checkPalette.html">checkPalette</a></span><span class="op">(</span><span class="va">palette</span>, unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/TGBH_palette.png"></p>
-<p>Or from a single frame:</p>
+</div>
+<div id="frame-palette" class="section level2">
+<h2 class="hasAnchor">
+<a href="#frame-palette" class="anchor"></a>Frame palette</h2>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu">getFrameColors</span><span class="op">(</span><span class="st">"movies/LaLaLand.mp4"</span>, time <span class="op">=</span> <span class="st">'54:16:40'</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">makeFastFrames</span><span class="op">(</span><span class="st">"path/to/movie.mp4"</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"00:12:29.660"</span>, <span class="st">"00:12:31.000"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu">framePalette</span><span class="op">(</span><span class="st">"path/to/movie.mp4"</span>, time <span class="op">=</span> <span class="st">'00:12:29.660'</span><span class="op">)</span>
 <span class="fu"><a href="reference/checkPalette.html">checkPalette</a></span><span class="op">(</span><span class="va">colors</span>, unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>Or directly from a pre-existing image:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu">framePalette</span><span class="op">(</span><span class="st">"path/to/frame.jpg"</span>, ncols <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+<span class="fu"><a href="reference/checkPalette.html">checkPalette</a></span><span class="op">(</span><span class="va">colors</span>, unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/LaLaLand-frame.png"><img src="reference/figures/LaLaLand-frame_palette.png"></p>
 </div>
 <div id="acknowledgments" class="section level2">
 <h2 class="hasAnchor">
 <a href="#acknowledgments" class="anchor"></a>Acknowledgments</h2>
-<p><a href="https://twitter.com/CINEMAPALETTES" class="uri">https://twitter.com/CINEMAPALETTES</a> inspired me to implement the movie color palette. <a href="https://thecolorsofmotion.com/" class="uri">https://thecolorsofmotion.com/</a> inspired me the movie color stacks.</p>
+<p><a href="https://twitter.com/CINEMAPALETTES" class="uri">https://twitter.com/CINEMAPALETTES</a> inspired me to implement the movie color palette.<br><a href="https://thecolorsofmotion.com/" class="uri">https://thecolorsofmotion.com/</a> inspired me the movie color stacks.</p>
 </div>
 </div>
   </div>
