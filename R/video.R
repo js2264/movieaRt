@@ -2,23 +2,30 @@
 #'
 #' @export
 
-makeFrames <- function(path = NULL, fps = '1', outdir = 'frames/') {
+makeFrames <- function(path = NULL, fps = '1', outdir = 'frames/', range = NULL) {
     if (!dir.exists(outdir)) dir.create(outdir)
-    system(glue::glue("ffmpeg -i {path} -vf fps={fps} {outdir}/out%04d.jpg"))
+    opts <- glue::glue("-vf fps={fps}")
+    if (!is.null(range)) {
+        ss <- range[1]
+        nb <- diff(range)
+        opts <- 'n'
+    }
+    cmd <- glue::glue("ffmpeg -i {path} {opts} {outdir}/out%04d.jpg")
+    system(cmd)
 }
 
-#' getFrameColors
+#' makeFastFrames
 #'
 #' @export
 
-getFrameColors <- function(path, time, outdir = 'frame/', ncols = 10) {
+makeFastFrames <- function(path = NULL, outdir = 'frames-fast/', rate = 30, range = c("00:01:00", "00:01:03")) {
     if (!dir.exists(outdir)) dir.create(outdir)
-    system(glue::glue("ffmpeg -i {path} -ss {time} -vframes 1 {outdir}/frame.jpg"))
-    cols <- getPaletteFromImg(glue::glue("{outdir}/frame.jpg"), ncols = NULL)
-    cols <- cols[cols != '#000000']
-    cols <- moviePalette(cols, n = ncols)
-    cols <- orderColors(cols)
-    return(cols)
+    ss <- range[1]
+    nsecs <- as.numeric(stringr::str_replace(range[2], '.*\\:', '')) - as.numeric(stringr::str_replace(range[1], '.*\\:', ''))
+    nb <- nsecs * rate
+    opts <- glue::glue("-ss {ss} -r {rate} -vframes {nb}")
+    cmd <- glue::glue("ffmpeg -i {path} {opts} {outdir}/out%04d.jpg")
+    system(cmd)
 }
 
 #' getColorList

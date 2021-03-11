@@ -15,3 +15,24 @@ moviePalette <- function(cols, n = 10) {
     res <- sample(cluster_cols[order(col_sats, decreasing = TRUE)[1:n]])
     return(res)
 }
+
+#' framePalette
+#'
+#' @export
+
+framePalette <- function(path, time = NULL, outdir = 'frame/', ncols = 10) {
+    ext <- tools::file_ext(path)
+    if (file.exists(path) & tolower(ext) %in% c('jpg', 'jpeg', 'png')) {
+        cols <- getPaletteFromImg(path, ncols = NULL)
+    }
+    else {
+        if (!dir.exists(outdir)) dir.create(outdir)
+        system(glue::glue("ffmpeg -i {path} -ss {time} -vframes 1 -qscale:v 1 -qmin 1 {outdir}/frame.jpg"))
+        cols <- getPaletteFromImg(glue::glue("{outdir}/frame.jpg"), ncols = NULL)
+    }
+    cols <- cols[cols != '#000000']
+    cols <- moviePalette(cols, n = ncols)
+    cols <- orderColors(cols)
+    return(cols)
+}
+
