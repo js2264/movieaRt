@@ -50,3 +50,18 @@ smoothColors <- function(list_colors, bin = 20) {
     cols <- zoo::rollapply(list_colors, width = bin, by = 1, averageColors)
     return(cols)
 }
+
+#' orderColors
+#'
+#' @export
+
+orderColors <- function(cols, by) {
+    cols <- sapply(cols, col2rgb) %>% 
+        rgb2hsv() %>% 
+        t() %>% 
+        as.data.frame() %>%
+        rownames_to_column() %>%
+        arrange(h, s) %>%
+        pull(rowname)
+    return(cols)
+}

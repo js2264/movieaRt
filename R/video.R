@@ -7,6 +7,20 @@ makeFrames <- function(path = NULL, fps = '1', outdir = 'frames/') {
     system(glue::glue("ffmpeg -i {path} -vf fps={fps} {outdir}/out%04d.jpg"))
 }
 
+#' getFrameColors
+#'
+#' @export
+
+getFrameColors <- function(path, time, outdir = 'frame/', ncols = 10) {
+    if (!dir.exists(outdir)) dir.create(outdir)
+    system(glue::glue("ffmpeg -i {path} -ss {time} -vframes 1 {outdir}/frame.jpg"))
+    cols <- getPaletteFromImg(glue::glue("{outdir}/frame.jpg"), ncols = NULL)
+    cols <- cols[cols != '#000000']
+    cols <- moviePalette(cols, n = ncols)
+    cols <- orderColors(cols)
+    return(cols)
+}
+
 #' getColorList
 #'
 #' @export

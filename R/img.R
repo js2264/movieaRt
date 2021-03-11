@@ -36,9 +36,13 @@ getPaletteFromImg <- function(img, ncols = 5) {
         do.call(c, .) %>% 
         table() %>% 
         sort(decreasing = TRUE) %>% 
-        head(30) %>% 
         names()
     # print(checkPalette(cols))
-    return(cols[1:ncols])
+    if (is.null(ncols)) {
+        return(cols)
+    }
+    else {
+        return(cols[1:ncols])
+    }
 }
 

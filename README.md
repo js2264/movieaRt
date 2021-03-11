@@ -30,7 +30,7 @@ Timeline can be added using the `nsec` argument:
 movieStack(average_colors, nsec = length(colors))
 ```
 
-Timepoints can be added using the `timepoints` argument: 
+Timepoints can be added using the `tp` argument: 
 
 ```r
 tp <- list(
@@ -66,3 +66,15 @@ checkPalette(palette, unique = TRUE)
 ```
 
 ![](man/figures/TGBH_palette.png)
+
+Or from a single frame: 
+
+```r
+colors <- getFrameColors("movies/LaLaLand.mp4", time = '54:16:40')
+checkPalette(colors, unique = TRUE)
+```
+
+## Acknowledgments
+
+https://twitter.com/CINEMAPALETTES inspired me to implement the movie color palette. 
+https://thecolorsofmotion.com/ inspired me the movie color stacks. 
